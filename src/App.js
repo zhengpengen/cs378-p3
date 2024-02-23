@@ -129,12 +129,31 @@ function App() {
     updateSum(0);
   }
 
+  function checkOut(){
+    if(totalCount === 0) {
+      window.alert("No items in cart");
+      return;
+    }
+
+    console.log(totalDict);
+    var order = "Order placed:\n";
+    for(var key in totalDict){
+      if(totalDict[key] > 0) order += totalDict[key] + " " + key + "\n";
+    }
+    console.log(order);
+    
+    window.alert(order);
+    clearAll();
+  }
+
   return (
     <div>
       <div className='container'> 
 
-        <div>{totalCount}</div>
-        <button onClick={clearAll}>CLEAR ALL</button>
+      
+
+        {/* <div>{totalCount}</div>
+        <button onClick={clearAll}>CLEAR ALL</button> */}
 
         <MenuHeader 
           logo="picobrain_logo.jpg"
@@ -154,8 +173,30 @@ function App() {
               changeEntry = {changeEntry}
             />))}
         </div>
-
-
+      </div>
+      <div class="footer">
+        <div className='row'>
+          <div className='col-1'>
+          </div>
+          <div className='col-4 subtotal'>
+            <div>Subtotal:</div> 
+            <div>${totalCount}</div> 
+          </div>
+          <div className='col-3 btn-group'>
+            <button 
+              type="button" 
+              class="btn btn-primary fitfull"
+              onClick={() => checkOut()}>Order</button>
+          </div>
+          <div className='col-3 btn-group'>
+            <button 
+              type="button" 
+              class="btn btn-primary fitfull"
+              onClick={() => clearAll()}>Clear All</button>
+          </div>
+          <div className='col-1'>
+          </div>
+        </div>
       </div>
     </div>
   );

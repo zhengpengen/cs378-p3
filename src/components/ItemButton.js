@@ -18,13 +18,14 @@ const ItemButton = ({title, dict, changeEntry}) => {
 
     return (
         <div className='row .btn-group'>
+            <div className='col-3'></div>
             <div className='col-3 nopadding btn-group'>
                 <button 
                     type="button" 
                     class="btn btn-primary btn-sm fitfull nopadding" 
                     onClick={() => subCount()}>-</button>
             </div>
-            <div className='col-6 nopadding'>
+            <div className='col-3 nopadding'>
                 <p class="text-center nopadding">{dict[title]}</p>
             </div>
             <div className='col-3 nopadding btn-group'>

@@ -14,7 +14,6 @@
 
  .btn-group{
     display: flex;
-    background-color: red;
  }
 
  .btn-primary{
@@ -24,7 +23,6 @@
 
   .fitfull {
     flex: 1;
-    background-color: red;
   }
 
   .logo{
@@ -94,4 +92,20 @@
       margin-top: 25px;
       margin-bottom: 25px;
   }
-  
+
+  .container {
+    /* background-color: orange; */
+    padding-bottom: 55px;
+  }
+
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: Monaco;
+    font-weight: bold;
+    font-size: 1.2em;
+  }

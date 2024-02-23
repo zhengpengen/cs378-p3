@@ -8,7 +8,6 @@ const MenuItem = ({ title, description, imagename, price, dict, changeEntry}) =>
 	return (
 		
 		<div className="row menu-row">
-			{/* <div>{dict[title]}</div> */}
 			<div className="col-4">
 					<img src={imagepath} />
 			</div>
@@ -20,10 +19,10 @@ const MenuItem = ({ title, description, imagename, price, dict, changeEntry}) =>
 					<div className="item-description">{description}</div>
 				</div>
 				<div className="row">
-					<div className="col-8">
+					<div className="col-6">
 						<div className="price">{price}</div>
 					</div>
-					<div className="col-3">
+					<div className="col-5">
 						<ItemButton 
 							title = {title}
 							dict = {dict}
