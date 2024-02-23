@@ -1,8 +1,20 @@
 import React, {useState} from 'react';
 
-const ItemButton = () => {
+const ItemButton = ({title, dict, changeEntry}) => {
 
-    const [currentCount, setCount] = useState(0);
+    // const [currentCount, setCount] = useState(dict[title]);
+
+    const [r, changer] = useState(true);
+
+    function addCount(){
+        changeEntry(title, 1);
+        changer(!r);
+    }
+
+    function subCount(){
+        changeEntry(title, -1);
+        changer(!r);
+    }
 
     return (
         <div className='row .btn-group'>
@@ -10,16 +22,16 @@ const ItemButton = () => {
                 <button 
                     type="button" 
                     class="btn btn-primary btn-sm fitfull nopadding" 
-                    onClick={() => setCount(Math.max(currentCount-1,0))}>-</button>
+                    onClick={() => subCount()}>-</button>
             </div>
             <div className='col-6 nopadding'>
-                <p class="text-center nopadding">{currentCount}</p>
+                <p class="text-center nopadding">{dict[title]}</p>
             </div>
             <div className='col-3 nopadding btn-group'>
                 <button 
                     type="button" 
                     class="btn btn-primary btn-sm fitfull nopadding" 
-                    onClick={() => setCount(currentCount+1)}>+</button>
+                    onClick={() => addCount()}>+</button>
             </div>
         </div>
     );

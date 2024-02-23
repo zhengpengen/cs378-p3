@@ -1,8 +1,10 @@
 import './App.css';
 import MenuItem from './components/MenuItem';
 import MenuHeader from './components/MenuHeader';
+import React, {useState} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; // This imports bootstrap css styles. You can use bootstrap or your own classes by using the className attribute in your elements.
+import { clear } from '@testing-library/user-event/dist/clear';
 
 // Menu data. An array of objects where each object represents a menu item. Each menu item has an id, title, description, image name, and price.
 // You can use the image name to get the image from the images folder.
@@ -80,40 +82,80 @@ const menuItems = [
 ];
 
 
+
+
 function App() {
+
+  // var tempDict = {};
+  // var costDict = {};
+
+  // for(var i = 0; i < menuItems.length; i++){
+  //   tempDict[menuItems[i]['title']] = 0;
+  //   tempDict[menuItems[i]['title']] = menuItems[i]['price'];
+  // }
+
+  var tempDict = menuItems.reduce((acc, item) => {
+    acc[item.title] = 0;
+    return acc;
+  }, {});
+
+  var costDict = menuItems.reduce((acc, item) => {
+    acc[item.title] = item.price;
+    return acc;
+  }, {});
+  
+
+  const [totalDict, changeTotal] = useState(tempDict);
+  const [totalCount, updateSum] = useState(0);
+  
+
+  function changeEntry(title, value) {
+    var newDict = totalDict;
+    newDict[title] = Math.max(0, newDict[title] + value);
+    changeTotal(newDict);
+    var newSum = 0;
+    for(var key in newDict){
+      newSum += newDict[key]*costDict[key];
+    }
+    updateSum(newSum.toFixed(2));
+  }
+
+  function clearAll(){
+    const newDict = Object.keys(tempDict).reduce((acc, key) => {
+      acc[key] = 0;
+      return acc;
+    }, {});
+    changeTotal(newDict);
+    updateSum(0);
+  }
+
   return (
     <div>
       <div className='container'> 
-        {/* <div className="row">
-          <div className="logo">
-            <img src='./images/picobrain_logo.jpg'/>
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="title">
-            <div className="cursive-text">Relax the Brain and Enjoy the Food</div>
-            <div className="title-text">Nutritional Mind-Enhancing Cuisine</div>
-          </div>
-        </div> */}
+        <div>{totalCount}</div>
+        <button onClick={clearAll}>CLEAR ALL</button>
 
         <MenuHeader 
           logo="picobrain_logo.jpg"
           header1="Relax the Brain and Enjoy the Food"
           header2="Nutritional Mind-Enhancing Cuisine"
-          />
+        />
 
 
         <div className='menu'>
           {menuItems.map((item) => (
-            <>
-              <MenuItem 
-                title={item.title}
-                description={item.description}
-                imagename={item.imageName}
-                price={item.price} />
-            </>))}
+            <MenuItem 
+              title={item.title}
+              description={item.description}
+              imagename={item.imageName}
+              price={item.price}
+              dict = {totalDict}
+              changeEntry = {changeEntry}
+            />))}
         </div>
+
+
       </div>
     </div>
   );

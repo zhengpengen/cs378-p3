@@ -1,15 +1,14 @@
 import React from 'react';
 import ItemButton from './ItemButton';
 
-// This is a functional component that represents a single menu item. It currently takes in the title and displays it in an h2 element.
-// Modify the component to take in all the other properties of a menu item you need and display them in the component.
-// Use bootstrap to style the elements so that it looks like the mockup in the assignment.
-// Hint: You can use the image name to get the image from the images folder.
-const MenuItem = ({ title, description, imagename, price}) => {
+const MenuItem = ({ title, description, imagename, price, dict, changeEntry}) => {
 
 	const imagepath = "./images/"+imagename;
+
 	return (
+		
 		<div className="row menu-row">
+			{/* <div>{dict[title]}</div> */}
 			<div className="col-4">
 					<img src={imagepath} />
 			</div>
@@ -25,8 +24,10 @@ const MenuItem = ({ title, description, imagename, price}) => {
 						<div className="price">{price}</div>
 					</div>
 					<div className="col-3">
-						{/* <button type="button" className="btn btn-secondary btn-sm">Add</button> */}
-						<ItemButton />
+						<ItemButton 
+							title = {title}
+							dict = {dict}
+							changeEntry= {changeEntry}/>
 					</div>
 					<div className='col-1'>
 
