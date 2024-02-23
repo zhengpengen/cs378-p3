@@ -85,14 +85,6 @@ const menuItems = [
 
 function App() {
 
-  // var tempDict = {};
-  // var costDict = {};
-
-  // for(var i = 0; i < menuItems.length; i++){
-  //   tempDict[menuItems[i]['title']] = 0;
-  //   tempDict[menuItems[i]['title']] = menuItems[i]['price'];
-  // }
-
   var tempDict = menuItems.reduce((acc, item) => {
     acc[item.title] = 0;
     return acc;
@@ -105,7 +97,7 @@ function App() {
   
 
   const [totalDict, changeTotal] = useState(tempDict);
-  const [totalCount, updateSum] = useState(0);
+  const [totalCount, updateSum] = useState("0.00");
   
 
   function changeEntry(title, value) {
@@ -125,11 +117,11 @@ function App() {
       return acc;
     }, {});
     changeTotal(newDict);
-    updateSum(0);
+    updateSum((0).toFixed(2));
   }
 
   function checkOut(){
-    if(totalCount === 0) {
+    if(totalCount === "0.00") {
       window.alert("No items in cart");
       return;
     }
